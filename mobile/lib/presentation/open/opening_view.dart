@@ -5,6 +5,7 @@ import 'package:biblia/presentation/resources/color_manager.dart';
 import 'package:biblia/presentation/resources/font_manager.dart';
 import 'package:biblia/presentation/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class OpeningView extends StatefulWidget {
   const OpeningView({Key? key}) : super(key: key);
@@ -15,24 +16,20 @@ class OpeningView extends StatefulWidget {
 
 class _OpeningViewState extends State<OpeningView> {
 
-  Timer? _timer;
-  _startDelay(){
-    _timer = Timer(Duration(seconds: 3), _goNext);
-  }
-
-  _goNext(){
-    Navigator.pushReplacementNamed(context, Routes.loginRoute);
-  }
 
   @override
   void initState() {
-    _startDelay();
     super.initState();
+
+    timeDilation = 3;
+
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.pushReplacementNamed(context, Routes.loginRoute);
+    });
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     super.dispose();
   }
 
