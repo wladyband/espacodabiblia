@@ -17,7 +17,7 @@ class _OpeningViewState extends State<OpeningView> {
 
   Timer? _timer;
   _startDelay(){
-    _timer = Timer(Duration(seconds: 2), _goNext);
+    _timer = Timer(Duration(seconds: 3), _goNext);
   }
 
   _goNext(){
@@ -58,7 +58,7 @@ class _OpeningViewState extends State<OpeningView> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Espaço da Bíblia",
-                style: TextStyle(fontSize: FontSize.s20, color: ColorManager.darkGreen),
+                style: TextStyle(fontSize: FontSize.s20, color: ColorManager.darkBlue),
               ),
             ),
           ],

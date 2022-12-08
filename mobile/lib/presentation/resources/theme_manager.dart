@@ -19,7 +19,7 @@ ThemeData getApplicationTheme() {
       accentColor: ColorManager.green1,
       // card view theme
       cardTheme: CardTheme(
-          color: ColorManager.white, shadowColor: ColorManager.green, elevation: AppSize.s4),
+          color: ColorManager.white, shadowColor: ColorManager.purple, elevation: AppSize.s4),
       // App bar theme
       appBarTheme: AppBarTheme(
           centerTitle: true,
@@ -43,15 +43,15 @@ ThemeData getApplicationTheme() {
 
       // Text theme
       textTheme: TextTheme(
-          headline1: getSemiBoldStyle(color: ColorManager.darkGreen, fontSize: FontSize.s16),
+          headline1: getSemiBoldStyle(color: ColorManager.darkBlue, fontSize: FontSize.s16),
           headline2: getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16),
           headline3: getBoldStyle(color: ColorManager.primary, fontSize: FontSize.s16),
           headline4: getRegularStyle(color: ColorManager.primary, fontSize: FontSize.s14),
-          subtitle1: getMediumStyle(color: ColorManager.lightGreen, fontSize: FontSize.s14),
+          subtitle1: getMediumStyle(color: ColorManager.lightPurple, fontSize: FontSize.s14),
           subtitle2: getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s14),
-          bodyText2: getMediumStyle(color: ColorManager.lightGreen),
+          bodyText2: getMediumStyle(color: ColorManager.lightPurple),
           caption: getRegularStyle(color: ColorManager.green1),
-          bodyText1: getRegularStyle(color: ColorManager.green)),
+          bodyText1: getRegularStyle(color: ColorManager.purple)),
       // input decoration theme (text form field)
 
       inputDecorationTheme: InputDecorationTheme(
@@ -60,13 +60,13 @@ ThemeData getApplicationTheme() {
         hintStyle: getRegularStyle(color: ColorManager.green1),
 
         // label style
-        labelStyle: getMediumStyle(color: ColorManager.darkGreen),
+        labelStyle: getMediumStyle(color: ColorManager.darkBlue),
         // error style
         errorStyle: getRegularStyle(color: ColorManager.error),
 
         // enabled border
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorManager.green, width: AppSize.s1_5),
+            borderSide: BorderSide(color: ColorManager.purple, width: AppSize.s1_5),
             borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
 
         // focused border
