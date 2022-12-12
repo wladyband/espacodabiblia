@@ -1,9 +1,7 @@
-
 import 'package:biblia/app/constant.dart';
 import 'package:biblia/data/responses/responses.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
-
 
 part 'app_api.g.dart';
 
@@ -11,6 +9,11 @@ part 'app_api.g.dart';
 abstract class AppServiceClient {
   factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
 
-  @POST("/customers/login")
-  Future<AuthenticationResponse> login();
+  @POST("/sessions")
+  Future<AuthenticationResponse> login(
+    @Field("email") String email,
+    @Field("password") String password,
+    @Field("imei") String imei,
+    @Field("deviceType") String deviceType,
+  );
 }
