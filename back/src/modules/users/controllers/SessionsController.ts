@@ -12,6 +12,10 @@ export default class SessionsController {
       password,
     });
 
-    return response.json(user);
+    return response.json({
+      success: true,
+      messager: 'Usuário logado com sucesso',
+      user
+    });
   }
 }
