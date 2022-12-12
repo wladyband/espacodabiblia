@@ -40,7 +40,9 @@ class RepositoryImpl extends Repository {
       }
     } else {
       // return connection error
-      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      return Left(
+        DataSource.NO_INTERNET_CONNECTION.getFailure(),
+      );
     }
   }
 }
