@@ -1,4 +1,5 @@
 
+import 'package:biblia/app/di.dart';
 import 'package:biblia/presentation/forgot_password/forgot_password_view.dart';
 import 'package:biblia/presentation/login/login_view.dart';
 import 'package:biblia/presentation/main/main_view.dart';
@@ -25,6 +26,7 @@ class RouteGenerator {
       case Routes.openingRoute:
         return MaterialPageRoute(builder: (_) => OpeningView());
       case Routes.loginRoute:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => LoginView());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => RegisterView());
