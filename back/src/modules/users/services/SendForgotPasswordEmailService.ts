@@ -1,5 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
+import UserToken from '../typeorm/entities/UserToken';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
 import UserTokensRepository from '../typeorm/repositories/UserTokensRepository';
 
@@ -8,7 +9,7 @@ interface IRequest {
 }
 
 class SendForgotPasswordEmailService {
-  public async execute({ email }: IRequest): Promise<void> {
+  public async execute({ email }: IRequest): Promise<UserToken> {
     const usersRepository = getCustomRepository(UsersRepository);
     const userTokensRepository = getCustomRepository(UserTokensRepository);
 
@@ -21,6 +22,8 @@ class SendForgotPasswordEmailService {
     const token = await userTokensRepository.generate(user.id);
 
     console.log(token);
+
+    return token  as UserToken;
   }
 }
 
