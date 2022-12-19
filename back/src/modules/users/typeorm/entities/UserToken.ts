@@ -24,6 +24,18 @@ class UserToken {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+
+  get getToken(){
+    return this.token;
+  }
+
+  set setToken(valor: string){
+      this.token = valor;
+  }
+
+
+
 }
 
 export default UserToken;

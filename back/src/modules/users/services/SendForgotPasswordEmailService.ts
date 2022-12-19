@@ -21,7 +21,7 @@ class SendForgotPasswordEmailService {
 
     const token = await userTokensRepository.generate(user.id);
 
-    console.log(token);
+    
 
     return token  as UserToken;
   }
