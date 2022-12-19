@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import SendForgotPasswordEmailService from '../services/SendForgotPasswordEmailService';
-import UserToken from '../typeorm/entities/UserToken';
+
 
 export default class ForgotPasswordController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -14,12 +14,10 @@ export default class ForgotPasswordController {
     });*/
 
     const token = await sendForgotPasswordEmail.execute({
-
       email,
-
     });
   
-    console.log(token);
+    
     
     return response.json({token});
   }
