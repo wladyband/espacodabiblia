@@ -32,8 +32,11 @@ class RepositoryImpl extends Repository {
         } else {
           // return biz logic error
           // return left
-          return Left(Failure(response.status ?? ApiInternalStatus.FAILURE,
-              response.message ?? ResponseMessage.DEFAULT));
+          return Left(
+
+            Failure(response.status ?? ApiInternalStatus.FAILURE,
+                response.message ?? ResponseMessage.DEFAULT),
+          );
         }
       } catch (error) {
         return (Left(ErrorHandler.handle(error).failure));

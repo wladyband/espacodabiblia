@@ -8,7 +8,6 @@ class BaseResponse {
   int? status;
   @JsonKey(name: "message")
   String? message;
-
 }
 
 
