@@ -9,6 +9,7 @@ import 'package:biblia/data/request/request.dart';
 import 'package:biblia/domain/model/model.dart';
 import 'package:biblia/domain/repository/repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class RepositoryImpl extends Repository {
   RemoteDataSource _remoteDataSource;
@@ -33,11 +34,11 @@ class RepositoryImpl extends Repository {
           // return biz logic error
           // return left
           return Left(
-
-            Failure(response.status ?? ApiInternalStatus.FAILURE,
-                response.message ?? ResponseMessage.DEFAULT),
+            Failure(response.status ?? ApiInternalStatus.FAILURE, response.message ?? ResponseMessage.DEFAULT),
           );
         }
+      } on DioError catch (e) {
+        return left(Failure(e.response!.statusCode!, e.response?.data["message"] ?? "Erro no servidor"));
       } catch (error) {
         return (Left(ErrorHandler.handle(error).failure));
       }

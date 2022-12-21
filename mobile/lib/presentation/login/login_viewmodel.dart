@@ -4,17 +4,17 @@ import 'package:biblia/domain/usecase/login_usecase.dart';
 import 'package:biblia/presentation/base/base_view_model.dart';
 import 'package:biblia/presentation/common/freezed_data_classes.dart';
 
+class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewModelOutputs {
+  StreamController _userNameStreamController = StreamController<String>.broadcast();
+  StreamController _passwordStreamController = StreamController<String>.broadcast();
 
+  final _failureController = StreamController<String>();
 
-class LoginViewModel extends BaseViewModel
-    with LoginViewModelInputs, LoginViewModelOutputs {
-  StreamController _userNameStreamController =
-  StreamController<String>.broadcast();
-  StreamController _passwordStreamController =
-  StreamController<String>.broadcast();
+  Stream<String> getFailureStream() {
+    return _failureController.stream;
+  }
 
-  StreamController _isAllInputsValidStreamController =
-  StreamController<void>.broadcast();
+  StreamController _isAllInputsValidStreamController = StreamController<void>.broadcast();
 
   var loginObject = LoginObject("", "");
 
@@ -46,47 +46,39 @@ class LoginViewModel extends BaseViewModel
 
   @override
   login() async {
-    (await _loginUseCase.execute(
-        LoginUseCaseInput(loginObject.userName, loginObject.password)))
-        .fold(
-            (failure) => {
-          // left -> failure
-          print(failure.message)
-        },
-            (data) => {
-          // right -> success (data)
-          print(data.name)
-        });
+    (await _loginUseCase.execute(LoginUseCaseInput(loginObject.userName, loginObject.password))).fold(
+        (failure) => _failureController.add(failure.message),
+        (data) => {
+              // right -> success (data)
+              print(data.name)
+            });
   }
 
   @override
   setPassword(String password) {
     inputPassword.add(password);
-    loginObject = loginObject.copyWith(
-        password: password); // data class operation same as kotlin
+    loginObject = loginObject.copyWith(password: password); // data class operation same as kotlin
     _validate();
   }
 
   @override
   setUserName(String userName) {
     inputUserName.add(userName);
-    loginObject = loginObject.copyWith(
-        userName: userName); // data class operation same as kotlin
+    loginObject = loginObject.copyWith(userName: userName); // data class operation same as kotlin
     _validate();
   }
 
   // outputs
   @override
-  Stream<bool> get outputIsPasswordValid => _passwordStreamController.stream
-      .map((password) => _isPasswordValid(password));
+  Stream<bool> get outputIsPasswordValid =>
+      _passwordStreamController.stream.map((password) => _isPasswordValid(password));
 
   @override
-  Stream<bool> get outputIsUserNameValid => _userNameStreamController.stream
-      .map((userName) => _isUserNameValid(userName));
+  Stream<bool> get outputIsUserNameValid =>
+      _userNameStreamController.stream.map((userName) => _isUserNameValid(userName));
 
   @override
-  Stream<bool> get outputIsAllInputsValid =>
-      _isAllInputsValidStreamController.stream.map((_) => _isAllInputsValid());
+  Stream<bool> get outputIsAllInputsValid => _isAllInputsValidStreamController.stream.map((_) => _isAllInputsValid());
 
   // private functions
 
@@ -103,8 +95,7 @@ class LoginViewModel extends BaseViewModel
   }
 
   bool _isAllInputsValid() {
-    return _isPasswordValid(loginObject.password) &&
-        _isUserNameValid(loginObject.userName);
+    return _isPasswordValid(loginObject.password) && _isUserNameValid(loginObject.userName);
   }
 }
 

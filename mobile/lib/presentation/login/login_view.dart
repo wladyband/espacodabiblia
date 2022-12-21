@@ -31,6 +31,14 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     _bind();
     super.initState();
+    _viewModel.getFailureStream().listen((event) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Text(event),
+        ),
+      );
+    });
   }
 
   @override
@@ -103,8 +111,7 @@ class _LoginViewState extends State<LoginView> {
                           height: AppSize.s40,
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all<Color>(ColorManager.primary),
+                              backgroundColor: MaterialStateProperty.all<Color>(ColorManager.primary),
                             ),
                             onPressed: (snapshot.data ?? false)
                                 ? () {
@@ -112,10 +119,8 @@ class _LoginViewState extends State<LoginView> {
                                   }
                                 : null,
                             child: Text(
-                                AppStrings.login,
-                              style: TextStyle(
-                                color: ColorManager.lightPurple
-                              ),
+                              AppStrings.login,
+                              style: TextStyle(color: ColorManager.lightPurple),
                             ),
                           ),
                         );
@@ -134,8 +139,7 @@ class _LoginViewState extends State<LoginView> {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, Routes.forgotPasswordRoute);
                         },
-                        child: Text(AppStrings.forgetPassword,
-                            style: Theme.of(context).textTheme.subtitle1),
+                        child: Text(AppStrings.forgetPassword, style: Theme.of(context).textTheme.subtitle1),
                       ),
                       TextButton(
                         onPressed: () {
